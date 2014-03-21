@@ -55,11 +55,11 @@ DATABASES = {
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = '/home/uncviscom/webapps/static_media/'
+STATIC_ROOT = '/home/uncviscom/webapps/shotgun_media/'
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
-STATIC_URL = 'http://uncviscom.webfactional.com/static/'
+STATIC_URL = 'http://uncviscom.webfactional.com/shotgunmedia/'
 
 # EMAIL_HOST = 'smtp.webfaction.com'
 # EMAIL_HOST_USER = 'mailbox_username'
