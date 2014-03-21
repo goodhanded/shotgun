@@ -45,3 +45,9 @@ STATIC_ROOT = '/home/uncviscom/webapps/static_media/'
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
 STATIC_URL = 'http://uncviscom.webfactional.com/static/'
+
+# EMAIL_HOST = 'smtp.webfaction.com'
+# EMAIL_HOST_USER = 'mailbox_username'
+# EMAIL_HOST_PASSWORD = 'mailbox_password'
+# DEFAULT_FROM_EMAIL = 'valid_email_address'
+# SERVER_EMAIL = 'valid_email_address'
