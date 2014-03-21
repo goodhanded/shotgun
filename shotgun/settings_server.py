@@ -17,7 +17,7 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['uncviscom.webfactional.com','shotgun.uncviscom.webfactional.com']
 
 
 # Database
@@ -26,14 +26,15 @@ ALLOWED_HOSTS = []
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'transcripts',                      # Or path to database file if using sqlite3.
+        'NAME': 'uncviscom_shotgun',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
-        'USER': 'uncviscom *or* YOURUSERNAME',
-        'PASSWORD': '*******',
-        'HOST': 'localhost',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '5432',                      # Set to empty string for default. Not used with sqlite3.
+        'USER': 'uncviscom_shotgun',
+        'PASSWORD': 'Pri-31e-Tru-Squ',
+        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
+
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
