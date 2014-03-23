@@ -1,0 +1,9 @@
+Django==1.6.2
+-e hg+https://bitbucket.org/etienned/pil-2009-raclette/#egg=PIL
+South==0.8.4
+dj-database-url==0.2.2
+dj-static==0.0.5
+gunicorn==18.0
+pystache==0.5.3
+static==1.0.2
+wsgiref==0.1.2
