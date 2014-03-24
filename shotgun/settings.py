@@ -25,36 +25,7 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-# Database
-# https://docs.djangoproject.com/en/1.6/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-#         'NAME': 'uncviscom_shotgun',                      # Or path to database file if using sqlite3.
-#         # The following settings are not used with sqlite3:
-#         'USER': 'uncviscom_shotgun',
-#         'PASSWORD': 'Pri-31e-Tru-Squ',
-#         'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-#         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
-#     }
-# }
-
-
-
-MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media_root')
-MEDIA_URL = '/media/'
-STATIC_ROOT = os.path.join(PROJECT_PATH, 'static_media')
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.6/howto/static-files/
-
-STATIC_URL = '/static/'
-
-STATICFILES_DIRS = (
-    # Put strings here like '/home/html/static' or  'C:/www/django/static'.
-    os.path.join(PROJECT_ROOT, 'static_media'),
-)
-
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -75,15 +46,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
-
-
-# # List of finder classes that know how to find static files in
-# # various locations.
-# STATICFILES_FINDERS = (
-#     'django.contrib.staticfiles.finders.FileSystemFinder',
-#     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-# #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
-# )
 
 
 ROOT_URLCONF = 'shotgun.urls'
@@ -114,3 +76,27 @@ USE_L10N = True
 
 USE_TZ = True
 
+MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media_root')
+MEDIA_URL = '/media/'
+STATIC_ROOT = os.path.join(PROJECT_PATH, 'static_media')
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.6/howto/static-files/
+
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    # Put strings here like '/home/html/static' or  'C:/www/django/static'.
+    os.path.join(PROJECT_ROOT, 'static_media'),
+)
+
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+)
+
+TEMPLATE_DIRS = (
+    # Put strings here, like "/home/html/django_templates"
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+    os.path.join(PROJECT_ROOT, "templates"),
+)
