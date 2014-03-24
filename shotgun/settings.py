@@ -58,7 +58,7 @@ STATIC_ROOT = os.path.join(PROJECT_PATH, 'static_media')
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/static_media/'
 
 STATICFILES_DIRS = (
     # Put strings here like '/home/html/static' or  'C:/www/django/static'.
