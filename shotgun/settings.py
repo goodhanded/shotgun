@@ -51,22 +51,19 @@ ALLOWED_HOSTS = ['uncviscom.webfactional.com','shotgun.uncviscom.webfactional.co
 # }
 
 
-# Absolute path to the directory static files should be collected to.
-# Don't put anything in this directory yourself; store your static files
-# in apps' "static/" subdirectories and in STATICFILES_DIRS.
-# Example: "/var/www/example.com/static/"
-STATIC_ROOT = '/home/uncviscom/webapps/shotgun_media/'
 
-# URL prefix for static files.
-# Example: "http://example.com/static/", "http://static.example.com/"
-STATIC_URL = 'http://uncviscom.webfactional.com/shotgunmedia/'
+MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media_root')
+MEDIA_URL = '/media/'
+STATIC_ROOT = os.path.join(PROJECT_PATH, 'static_media')
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.6/howto/static-files/
 
-# EMAIL_HOST = 'smtp.webfaction.com'
-# EMAIL_HOST_USER = 'mailbox_username'
-# EMAIL_HOST_PASSWORD = 'mailbox_password'
-# DEFAULT_FROM_EMAIL = 'valid_email_address'
-# SERVER_EMAIL = 'valid_email_address'
+STATIC_URL = '/static/'
 
+STATICFILES_DIRS = (
+    # Put strings here like '/home/html/static' or  'C:/www/django/static'.
+    os.path.join(PROJECT_ROOT, 'static_media'),
+)
 
 
 # Application definition
@@ -89,14 +86,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-
-# Additional locations of static files
-STATICFILES_DIRS = (
-    # Put strings here, like "/home/html/static" or "C:/www/django/static".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-    os.path.join(PROJECT_ROOT, 'static_media'),
-)
 
 # List of finder classes that know how to find static files in
 # various locations.
