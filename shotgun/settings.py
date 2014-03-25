@@ -82,3 +82,9 @@ TEMPLATE_DIRS = (
 # Configure django-registration
 ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window; you may, of course, use a different value.
 
+# Configure email
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'shotgun.ride.share@gmail.com'
+EMAIL_HOST_PASSWORD = 'simonerocks'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
