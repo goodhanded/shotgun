@@ -59,16 +59,16 @@ DATABASES = {
     }
 }
 
-PUBLIC_ROOT = os.path.join(PROJECT_ROOT, 'public')
 RESOURCES_ROOT = os.path.join(PROJECT_ROOT, 'resources')
-STATIC_ROOT = os.path.join(PUBLIC_ROOT, 'static')
-MEDIA_ROOT = os.path.join(PUBLIC_ROOT, 'uploads')
+PUBLIC_ROOT = os.path.join(RESOURCES_ROOT, 'public')
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'uploads')
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/uploads/'
 
 STATICFILES_DIRS = (
-    os.path.join(PUBLIC_ROOT, 'static'),
+    PUBLIC_ROOT,
 )
 
 TEMPLATE_DIRS = (
