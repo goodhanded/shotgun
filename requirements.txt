@@ -1,9 +1,15 @@
 Django==1.6.2
--e hg+https://bitbucket.org/etienned/pil-2009-raclette/#egg=PIL
+-e hg+https://bitbucket.org/etienned/pil-2009-raclette/@55d24e80a982b6180464d6bf1125e021b4b0cbf1#egg=PIL-dev
 South==0.8.4
 dj-database-url==0.2.2
 dj-static==0.0.5
+django-haystack==2.1.0
+django-registration==1.0
 gunicorn==18.0
 pystache==0.5.3
 static==1.0.2
+stevedore==0.14.1
+virtualenv==1.11.4
+virtualenv-clone==0.2.4
+virtualenvwrapper==4.2
 wsgiref==0.1.2
