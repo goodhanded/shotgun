@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 import os
 
 PROJECT_ROOT = os.path.dirname(__file__)
-PROJECT_PATH = os.path.dirname(PROJECT_ROOT)
 
 SECRET_KEY = '8xsh%by4t5^tk+h$)0(hzl49f5jun2=a)hm*a!u^+3qvc7dqd%'
 
@@ -56,20 +55,22 @@ WSGI_APPLICATION = 'shotgun.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(PROJECT_PATH, 'db.sqlite3'),
+        'NAME': os.path.join(PROJECT_ROOT, 'db.sqlite3'),
     }
 }
 
-STATIC_ROOT = os.path.join(PROJECT_PATH, 'static')
-MEDIA_ROOT = os.path.join(PROJECT_PATH, 'uploads')
+PUBLIC_ROOT = os.path.join(PROJECT_ROOT, 'public')
+RESOURCES_ROOT = os.path.join(PROJECT_ROOT, 'resources')
+STATIC_ROOT = os.path.join(PUBLIC_ROOT, 'static')
+MEDIA_ROOT = os.path.join(PUBLIC_ROOT, 'uploads')
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/uploads/'
 
 STATICFILES_DIRS = (
-    os.path.join(PROJECT_ROOT, 'static'),
+    os.path.join(PUBLIC_ROOT, 'static'),
 )
 
 TEMPLATE_DIRS = (
-    os.path.join(PROJECT_ROOT, 'templates'),
+    os.path.join(RESOURCES_ROOT, 'templates'),
 )
