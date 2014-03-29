@@ -1,0 +1,61 @@
+body{
+    background-image: url("img/road.jpg");
+    
+}
+
+a{
+    color: #ddc84b;
+    font-family: Archivo Black;
+    font-size: 25px;
+    text-transform: uppercase;
+    padding-right: 20px;
+    padding-top: 10px;
+    float: right;
+}
+
+h1{
+    font-family: Bangla Sangam MN;
+    font-size: 70px;
+}
+
+h4{
+    font-family: Avenir;
+    color: #ddc84b;
+}
+.container-fluid{
+    position: relative;    
+    
+}
+
+#section-home{
+    position: absolute;
+    bottom: 0;
+    
+}
+
+#section-login{
+    width: 280px;
+    height: 180px;
+    float: right;
+    margin: 80px -250px 0px 0px;
+}
+
+    label{
+        font-family: Myriad Pro;
+        font-size: 15px;
+        color: #999999;
+        font-weight: 100;
+}
+
+    input, button{
+        width: 250px;
+        margin: 5px;
+}
+
+#section-register{
+    width: 280px;
+   float: right;
+    margin: 80px 0px 0px 100px;
+    
+    
+}
