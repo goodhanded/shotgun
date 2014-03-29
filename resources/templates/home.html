@@ -1,53 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    
-    <script>
-        $(document).ready(function(){
-            $('#section-login').hide();
-            $('#section-register').hide();
-            var loginTime = 0;
-            var signupTime = 0;
-          
-            $('#login').click(function(){
-                $('#section-register').hide();
-                signupTime=0;
-                if(loginTime==0){
-                    $('#section-login').show();
-                    loginTime=1;
-                }else{
-                    $('#section-login').hide();
-                    loginTime=0;
-                }
-            });
-
-            $('#signup').click(function(){
-
-                $('#section-login').hide();
-                loginTime=0;
-                if(signupTime==0){
-                    $('#section-register').show();
-                    signupTime=1;
-                }else{
-                    $('#section-register').hide();
-                    signupTime=0;
-                }
-            }); 
-        });
-
-    </script>
     <nav>
         {% if user.is_authenticated %}
-            <a href="{% url 'drive.views.drive_logout' %}" id="logout">Logout</a>
+            <a href="{% url 'drive.views.drive_logout' %}">Logout</a>
         {% else %}
-            <a href="#" id="login">Login</a>
+            <a href="#">Login</a>
         {% endif %}
-        <a href="#" id="signup">Signup</a>
+        <a href="#">Signup</a>
     </nav>
 
     <section id="section-home">
         <h1>Shotgun</h1>
-        <h4>Find a ride in your area.</h4>
+        <p>Ipsum dolor sit amet</p>
         {% if user.is_authenticated %}
             <p>Hello, {{ user.username }}!</p>
         {% endif %}
