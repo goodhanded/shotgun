@@ -1,5 +1,9 @@
 body{
-    background-image: url("img/road.jpg");
+    background-image: url("../img/road.jpg");
+    background-repeat: no-repeat;
+    background-position: fixed;
+    background-size: cover;
+        bottom: 0;
     
 }
 
@@ -16,6 +20,7 @@ a{
 h1{
     font-family: Bangla Sangam MN;
     font-size: 70px;
+    color: #fff;
 }
 
 h4{
@@ -28,16 +33,20 @@ h4{
 }
 
 #section-home{
-    position: absolute;
-    bottom: 0;
+    position: fixed;
+        bottom: 0;
+        margin-bottom: 50px;
     
 }
 
 #section-login{
     width: 280px;
     height: 180px;
+    background-color: white;
     float: right;
-    margin: 80px -250px 0px 0px;
+    margin: 80px -220px 0px 0px;
+    padding: 10px;
+
 }
 
     label{
@@ -55,7 +64,7 @@ h4{
 #section-register{
     width: 280px;
    float: right;
-    margin: 80px 0px 0px 100px;
-    
-    
+    margin: 80px -220px 0px 100px;
+    background-color: white;
+    padding: 10px;
 }
