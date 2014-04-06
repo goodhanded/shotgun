@@ -13,3 +13,6 @@ def home(request):
 def drive_logout(request):
     logout(request)
     return redirect('home')
+
+def rides_new(request):
+    return render(request, 'rides/new.html')

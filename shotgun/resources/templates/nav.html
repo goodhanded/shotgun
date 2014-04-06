@@ -1,24 +1,13 @@
-{% extends 'base.html' %}
+<nav class="account">
+    {% if user.is_authenticated %}
+        <a href="{% url 'drive.views.drive_logout' %}" id="logout">Logout</a>
+    {% else %}
+        <a href="#" id="login">Login</a>
+        <a href="#" id="signup">Signup</a>
+    {% endif %}
+    
 
-{% block content %}
-    <nav>
-        {% if user.is_authenticated %}
-            <a href="{% url 'drive.views.drive_logout' %}">Logout</a>
-        {% else %}
-            <a href="#">Login</a>
-        {% endif %}
-        <a href="#">Signup</a>
-    </nav>
-
-    <section id="section-home">
-        <h1>Shotgun</h1>
-        <p>Ipsum dolor sit amet</p>
-        {% if user.is_authenticated %}
-            <p>Hello, {{ user.username }}!</p>
-        {% endif %}
-    </section>
-
-    <section id="section-login">
+    <div id="section-login">
         {% if loginForm.errors %}
             <p class="error">Sorry, that's not a valid username or password</p>
         {% endif %}
@@ -33,12 +22,12 @@
                 </div>
             {% endfor %}
 
-            <input type="submit" value="login" />
+            <input type="submit" value="Login" />
             <input type="hidden" name="next" value="{% url 'home' %}" />
         </form>
-    </section>
+    </div>
 
-    <section id="section-register">
+    <div id="section-register">
         <form action="{% url 'registration_register' %}" method="post">
             {% csrf_token %}
             {% for field in registrationForm %}
@@ -47,8 +36,7 @@
                     {{ field.label_tag }} {{ field }}
                 </div>
             {% endfor %}
-            <p><input type="submit" value="Register" /></p>
+            <input type="submit" value="Register" />
         </form>
-    </section>
-
-{% endblock %}
+    </div>  
+</nav>

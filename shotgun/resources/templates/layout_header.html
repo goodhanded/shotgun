@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+    <div class="header">
+        <div class="pull-right">    
+            {% if user.is_authenticated %}
+                <a href="{% url 'drive.views.drive_logout' %}" id="logout">Logout</a>
+            {% endif %}
+        </div>
+        <h1>Shotgun!</h1>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12">
+
+                {% block content %}
+
+                {% endblock %}   
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+

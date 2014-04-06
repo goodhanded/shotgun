@@ -1,3 +1,9 @@
 from django.db import models
+from easy_maps.models import Address
 
-# Create your models here.
+# class Ride(models.Model):
+
+#     fromAddress = models.ForeignKey('Address')
+#     toAddress = models.ForeignKey('Address')
+
+

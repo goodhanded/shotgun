@@ -1,0 +1,60 @@
+{% extends 'layout_header.html' %}
+
+{% block content %}
+    
+    <section id="section-ride-new">
+        <form action="" method="post" class="form-inline" role="form" autocomplete="off">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2>Post a Ride</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="address-from">From:</label><br>
+                            <input id="address-from" type="text" class="col-md-12" autocomplete="off">
+
+                            <div id="map-from"></div>
+
+                            <span id="details-from">
+                                <input type="hidden" name="lat" value="">
+                                <input type="hidden" name="lng" value="">
+                                <input type="hidden" name="formatted_address" value="">
+                            </span>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="address-to">To:</label><br>
+                            <input id="address-to" type="text" class="col-md-12" autocomplete="off">
+
+                            <div id="map-to"></div>
+                            
+                            <span id="details-to">
+                                <input type="hidden" name="lat" value="">
+                                <input type="hidden" name="lng" value="">
+                                <input type="hidden" name="formatted_address" value="">
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12" style="text-align: center">
+                            <input type="submit" value="Post Your Ride!" class="btn btn-primary" />
+                        </div>
+                    </div>
+                </div>
+            </div>  
+        </form>
+    </section>
+
+    <script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>
+    <script src="{{ STATIC_URL }}js/jquery.geocomplete.min.js"></script>
+    <script>
+
+        $(document).ready(function(){
+            $("#address-from").geocomplete({details: "#details-from", map: "#map-from"});
+            $("#address-to").geocomplete({details: "#details-to", map: "#map-to"});
+        });
+
+    </script>
+{% endblock %}

@@ -4,19 +4,14 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <link href="{{ STATIC_URL }}css/normalize.css" rel="stylesheet">
-        <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet">
-        <link href="{{STATIC_URL }}css/shotgun.css" rel="stylesheet">
+        <link href="{{STATIC_URL}}css/normalize.css" rel="stylesheet">
+        <link href="{{STATIC_URL}}css/bootstrap.min.css" rel="stylesheet">
+        <link href="{{STATIC_URL}}css/shotgun.css" rel="stylesheet">
+        {% block head %}{% endblock %}
         <title>Shotgun!</title>
     </head>
     <body>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xs-12">
-                    {% block content %}
-                    {% endblock %}
-                </div>
-            </div>
-        </div>
+        {% block body %}{% endblock %}
+        <script src="{{STATIC_URL}}js/shotgun.nav.js"></script>
     </body>
 </html>
