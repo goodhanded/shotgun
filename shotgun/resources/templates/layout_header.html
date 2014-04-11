@@ -14,7 +14,15 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-12">
-
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert{% if message.tags %} alert-{{message.tags}}{% else %} alert-info{% endif %} alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                
                 {% block content %}
 
                 {% endblock %}   

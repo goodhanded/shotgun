@@ -50,6 +50,11 @@ nav.account input[type=submit] {
     background-color: #ffffff;
     border: 1px solid #999999;
     text-transform: uppercase;
+    text-decoration: none;
+}
+
+.nav-home>a:hover {
+    color: #666666;
 }
 
 label {
@@ -97,8 +102,16 @@ label {
     height: 100%;
 }
 
-#map-from, #map-to {
-    height: 200px;
+.errorlist {
+    color: #ff0000;
+    margin-left: 0px;
+    padding-left: 0px;
+    list-style: none;
+}
+
+#map {
+    margin-top: 35px;
+    height: 275px;
     width: 100%;
     border: 1px solid #999999;
 }
@@ -122,10 +135,11 @@ label {
     margin-top: 20px;
 }
 
+#section-ride-new div.row {
+    margin-top: 20px;
+}
+
 #section-ride-new label {
     margin-top: 15px;
 }
 
-#section-ride-new input[type=submit] {
-    margin-top: 20px;
-}

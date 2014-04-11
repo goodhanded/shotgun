@@ -10,6 +10,16 @@
         </div>
         <div class="row">
             <div class="col-xs-12">
+                
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert{% if message.tags %} alert-{{message.tags}}{% else %} alert-info{% endif %}">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
                 {% block content %}
 
                 {% endblock %}   

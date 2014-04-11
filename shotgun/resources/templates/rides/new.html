@@ -4,6 +4,7 @@
     
     <section id="section-ride-new">
         <form action="" method="post" class="form-inline" role="form" autocomplete="off">
+            {% csrf_token %}
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
                     <div class="row">
@@ -14,29 +15,42 @@
                     <div class="row">
                         <div class="col-md-6">
                             <label for="address-from">From:</label><br>
-                            <input id="address-from" type="text" class="col-md-12" autocomplete="off">
+                            {{rideForm.fromInput}}
+                            {{rideForm.fromInput.errors}}
 
-                            <div id="map-from"></div>
+                            <label for="address-to">To:</label><br>
+                            {{rideForm.toInput}}
+                            {{rideForm.toInput.errors}}
+
+                            <label for="id_leavingOn">Leaving On:</label><br>
+                            {{rideForm.leavingOn}}
+                            {{rideForm.leavingOn.errors}}
+
+                            <label for="id_gasMoney">Gas Money:</label><br>
+                            {{rideForm.gasMoney}}
+                            {{rideForm.gasMoney.errors}}
+
+                            <label for="id_luggageRoom">Luggage Room:</label><br>
+                            {{rideForm.luggageRoom}}
+                            {{rideForm.luggageRoom.errors}}
 
                             <span id="details-from">
-                                <input type="hidden" name="lat" value="">
-                                <input type="hidden" name="lng" value="">
-                                <input type="hidden" name="formatted_address" value="">
+                                {{rideForm.fromLat}}
+                                {{rideForm.fromLng}}
+                                {{rideForm.fromFormatted}}
+                            </span>
+
+                            <span id="details-to">
+                                {{rideForm.toLat}}
+                                {{rideForm.toLng}}
+                                {{rideForm.toFormatted}}
                             </span>
                         </div>
                         <div class="col-md-6">
-                            <label for="address-to">To:</label><br>
-                            <input id="address-to" type="text" class="col-md-12" autocomplete="off">
-
-                            <div id="map-to"></div>
-                            
-                            <span id="details-to">
-                                <input type="hidden" name="lat" value="">
-                                <input type="hidden" name="lng" value="">
-                                <input type="hidden" name="formatted_address" value="">
-                            </span>
+                            <div id="map"></div>
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="col-md-12" style="text-align: center">
                             <input type="submit" value="Post Your Ride!" class="btn btn-primary" />
@@ -52,8 +66,8 @@
     <script>
 
         $(document).ready(function(){
-            $("#address-from").geocomplete({details: "#details-from", map: "#map-from"});
-            $("#address-to").geocomplete({details: "#details-to", map: "#map-to"});
+            $("#address-from").geocomplete({details: "#details-from", detailsAttribute: "data-geo", map: "#map"});
+            $("#address-to").geocomplete({details: "#details-to", detailsAttribute: "data-geo", map: "#map"});
         });
 
     </script>
