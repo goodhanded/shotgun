@@ -23,4 +23,4 @@ class RideForm(forms.Form):
 class ProfileForm(ModelForm):
     class Meta:
         model = ShotgunProfile
-        fields = ['school','year','passengers','user']
+        fields = ['avatar','school','year','passengers']
