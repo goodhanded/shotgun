@@ -1,0 +1,31 @@
+{% extends 'layout_header.html' %}
+
+{% block content %}
+
+    {# This should be fixed to the top right #}
+    <div id="map">
+        
+    </div>
+
+
+    {# This is the list of rides #}
+    <section id="section-ride-index">
+
+        {% for ride in rides %}
+            
+            <div class="ride">
+                {#<img src="#" alt="Driver Image">#}
+                <h2>{{ride.driver.username}}</h2>
+                <p>
+                    {{ride.driver.shotgunprofile.school}}<br>
+                    {{ride.driver.shotgunprofile.year}}<br>
+                    Types of Passengers: {{ride.driver.shotgunprofile.passengers}}<br>
+                    From {{ride.fromLocation.city}} to {{ride.toLocation.city}}
+                </p>
+            </div>
+
+        {% endfor %}
+
+    </section>
+
+{% endblock %}
