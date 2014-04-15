@@ -1,0 +1,75 @@
+{% extends 'layout_header.html' %}
+
+{% block content %}
+
+    {# This should be fixed to the top right #}
+    <div id="map_canvas">
+        
+    </div>
+
+
+    {# This is the list of rides #}
+    <section id="section-ride-show">
+
+            <div class="ride">
+                {#<img src="#" alt="Driver Image">#}
+                <h2>{{ride.driver.username}}</h2>
+                <p>
+                    {{ride.driver.shotgunprofile.school}}<br>
+                    {{ride.driver.shotgunprofile.year}}<br>
+                    Types of Passengers: {{ride.driver.shotgunprofile.passengers}}<br>
+                    From {{ride.fromLocation.city}} to {{ride.toLocation.city}}
+                </p>
+            </div>
+
+    </section>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArTylJf9gxDN3uns-Wrmnh9drOb9xmMFU&sensor=true"></script>
+
+    <script type="text/javascript">
+
+        var directionsService = new google.maps.DirectionsService();
+        var directionsDisplay = new google.maps.DirectionsRenderer();
+
+        var bounds = new google.maps.LatLngBounds();
+        var from = new google.maps.LatLng({{ride.fromLocation.lat}}, {{ride.fromLocation.lng}});
+        var to = new google.maps.LatLng({{ride.toLocation.lat}}, {{ride.toLocation.lng}});
+
+        var mapOptions = {
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+
+        map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+
+        directionsDisplay.setMap(map);
+         
+        fromMarker = new google.maps.Marker({
+            position: from,
+            title: 'Start'
+        });
+        bounds.extend(fromMarker.position);
+
+        toMarker = new google.maps.Marker({
+            position: to,
+            title: 'End'
+        });
+        bounds.extend(toMarker.position);
+
+        var request = {
+            origin: from,
+            destination: to,
+            travelMode: google.maps.TravelMode.DRIVING
+        }
+        directionsService.route(request, function(response, status) {
+            if (status == google.maps.DirectionsStatus.OK) {
+                directionsDisplay.setDirections(response);
+            }
+        });
+
+        map.fitBounds(bounds);
+
+    </script>
+{% endblock %}

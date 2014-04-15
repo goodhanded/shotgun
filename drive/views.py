@@ -21,12 +21,12 @@ def drive_logout(request):
 
 def profile_edit(request):
     if request.method == 'POST':
-        form = ProfileForm(request.POST)
+        form = ProfileForm(request.POST, instance=ShotgunProfile.objects.get(user=request.user))
 
         if form.is_valid():
 
             profile = form.save(commit=False)
-            profile.user = request.user
+            # profile.user = request.user
             profile.save()
 
             messages.success(request,'Your profile has been updated!')
@@ -43,7 +43,7 @@ def profile_edit(request):
             profile.user = user
             profile.save()
         
-        form = ProfileForm(instance=user.shotgunprofile)
+        form = ProfileForm(instance=ShotgunProfile.objects.get(user=request.user))
 
     return render(request, 'profile/edit.html', {'form': form})
 

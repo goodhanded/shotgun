@@ -119,7 +119,7 @@ label {
     list-style: none;
 }
 
-#map {
+#map, #map_canvas {
     margin-top: 35px;
     height: 275px;
     width: 100%;
