@@ -23,7 +23,7 @@
                             {{rideForm.toInput.errors}}
 
                             <label for="id_leavingOn">Leaving On:</label><br>
-                            {{rideForm.leavingOn}}
+                           {{rideForm.leavingOn}}
                             {{rideForm.leavingOn.errors}}
 
                             <label for="id_gasMoney">Gas Money:</label><br>
@@ -70,7 +70,8 @@
         $(document).ready(function(){
             $("#address-from").geocomplete({details: "#details-from", detailsAttribute: "data-geo", map: "#map"});
             $("#address-to").geocomplete({details: "#details-to", detailsAttribute: "data-geo", map: "#map"});
+            $( "#id_leavingOn" ).datepicker();
         });
-
+        
     </script>
 {% endblock %}
