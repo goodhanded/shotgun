@@ -100,13 +100,17 @@ label {
         -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    padding: 15px;
-    border-bottom: 1px solid #666666;
+    padding: 20px;
 }
 
 .header h1 {
-    margin: 0px;
+    margin: 0px 30px 0px 30px;
 }
+
+.pull-right{
+    margin: 0px 30px 0px 30px;
+}
+
 
 .container-home {
     height: 100%;
@@ -118,8 +122,23 @@ label {
     padding-left: 0px;
     list-style: none;
 }
+#map{
+    border: 1px solid black;
+    height: 280px;
+    margin: 30px 30px 0px 30px;  
+}
 
-#map, #map_canvas {
+#ride-map{
+       border: 1px solid black;
+    height: 400px;
+    margin: 30px 30px 0px 30px; 
+}
+
+#new-map{
+    height: 300px;
+    border: 1px solid black;
+}
+#map_canvas {
     margin-top: 35px;
     height: 275px;
     width: 100%;
@@ -153,3 +172,45 @@ label {
     margin-top: 15px;
 }
 
+#section-ride-index{
+    margin: 20px 30px 0px 30px;
+}
+
+.ride{
+    border-bottom: 1px solid black;
+}
+
+.ride>h4{
+    color: black;
+    font-weight: bold;
+    margin-top: -5px;
+}
+
+.ride>p{
+    margin-top: -5px;
+    overflow: auto;
+}
+
+#img{
+    height: 105px;
+    width: 120px;
+    border: 1px solid black;
+    float: left;
+    margin-right: 10px;
+}
+
+.btn-primary{
+    background-color: #ddc84b;
+    border-color: #ddc84b;
+    font-family: "Myriad Pro", Arial, "sans-serif";
+    font-size: 15px;
+    margin-right: 150px;
+}
+
+.ui-widget-header{
+    background: #ddc84b;
+    border: #ddc84b;
+}
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default{
+    color: white;
+}

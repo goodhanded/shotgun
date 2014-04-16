@@ -5,29 +5,38 @@
     {# This should be fixed to the top right #}
      
     </script>
-    <div id="map">
-        
-    </div>
 
 
     {# This is the list of rides #}
+    <div class="col-md-5">
     <section id="section-ride-index">
 
         {% for ride in rides %}
             
+            
             <div class="ride">
                 {#<img src="#" alt="Driver Image">#}
+               <div id="img"></div>
                 <h2>{{ride.driver.username}}</h2>
+                <h4>From {{ride.fromLocation.city}} to {{ride.toLocation.city}}</h4>
                 <p>
-                    {{ride.driver.shotgunprofile.school}}<br>
+                    {{ride.driver.shotgunprofile.school}} |
                     {{ride.driver.shotgunprofile.year}}<br>
                     Types of Passengers: {{ride.driver.shotgunprofile.passengers}}<br>
-                    From {{ride.fromLocation.city}} to {{ride.toLocation.city}}
+                    
                 </p>
             </div>
 
         {% endfor %}
 
     </section>
+    </div>
+    
+        <div class="col-md-6 col-md-offset-1">
+        <div id="ride-map">
+        
+        </div>
+    </div>
+
 
 {% endblock %}
