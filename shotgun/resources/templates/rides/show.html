@@ -2,27 +2,31 @@
 
 {% block content %}
 
-    {# This should be fixed to the top right #}
+ 
+
+    {# This is the list of rides #}
+     <div class="col-md-5">
+    <section id="section-ride-index">
+
+            <div class="ride">
+                <div id="img"></div>
+                <h2>{{ride.driver.username}}</h2>
+                <h4>From {{ride.fromLocation.city}} to {{ride.toLocation.city}}</h4>
+                <p>
+                    {{ride.driver.shotgunprofile.school}} |
+                    {{ride.driver.shotgunprofile.year}}<br>
+                    Types of Passengers: {{ride.driver.shotgunprofile.passengers}}<br>
+
+    </section>
+     </div>
+    
+       {# This should be fixed to the top right #}
+     <div class="col-md-6 col-md-offset-1">
     <div id="map_canvas">
         
     </div>
+     </div>
 
-
-    {# This is the list of rides #}
-    <section id="section-ride-show">
-
-            <div class="ride">
-                {#<img src="#" alt="Driver Image">#}
-                <h2>{{ride.driver.username}}</h2>
-                <p>
-                    {{ride.driver.shotgunprofile.school}}<br>
-                    {{ride.driver.shotgunprofile.year}}<br>
-                    Types of Passengers: {{ride.driver.shotgunprofile.passengers}}<br>
-                    From {{ride.fromLocation.city}} to {{ride.toLocation.city}}
-                </p>
-            </div>
-
-    </section>
 
 {% endblock %}
 
