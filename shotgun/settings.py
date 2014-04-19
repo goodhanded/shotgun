@@ -100,7 +100,7 @@ EMAIL_USE_TLS = True
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
-        'URL': 'http://127.0.0.1:9200/',
+        'URL': 'http://paas:20c23e030345baa25759327b099c79dd@dwalin-us-east-1.searchly.com',
         'INDEX_NAME': 'shotgun',
     },
 }
