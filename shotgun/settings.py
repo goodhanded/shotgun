@@ -100,7 +100,7 @@ EMAIL_USE_TLS = True
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
-        'URL': os.environ['SEARCHBOX_URL'],
+        'URL': 'http://127.0.0.1:9200/',
         'INDEX_NAME': 'shotgun',
     },
 }
