@@ -1,13 +1,15 @@
 from django.shortcuts import render, get_object_or_404, redirect, render_to_response
 from django.http import HttpResponse
 from registration.forms import RegistrationForm
-from drive.forms import RideForm, ProfileForm
+from drive.forms import RideForm, ProfileForm, SearchForm
 from drive.models import Location, Ride, ShotgunProfile
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import logout
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from haystack.query import SearchQuerySet
+from haystack.utils.geo import Point, D
 
 def home(request):
     return render(request, "home.html", {
@@ -99,8 +101,33 @@ def rides_new(request):
 
     else:
         rideForm = RideForm()
+
     return render(request, 'rides/new.html', {'rideForm': rideForm})
 
 def rides_show(request, pk):
     ride = get_object_or_404(Ride, id=pk)
     return render(request, "rides/show.html", {'ride': ride})
+
+def rides_search(request):
+    if request.method == 'POST':
+        searchForm = SearchForm(request.POST)
+
+        if searchForm.is_valid():
+            fromLat = searchForm.cleaned_data['fromLat']
+            fromLng = searchForm.cleaned_data['fromLng']
+            fromFormatted = searchForm.cleaned_data['fromFormatted']
+            fromCity = searchForm.cleaned_data['fromLocality']
+            toLat = searchForm.cleaned_data['toLat']
+            toLng = searchForm.cleaned_data['toLng']
+            toFormatted = searchForm.cleaned_data['toFormatted']
+            toCity = searchForm.cleaned_data['toLocality']
+
+
+
+            return render(request, 'search/search.html', '')      
+
+
+    else:
+        searchForm = SearchForm()
+
+    return render(request, 'rides/search.html', {'searchForm': searchForm})
