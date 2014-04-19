@@ -37,6 +37,13 @@ INSTALLED_APPS = (
     'registration',
     'south',
     'drive',
+    'haystack',
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.static',
+    'django.contrib.messages.context_processors.messages',
+    'django.contrib.auth.context_processors.auth',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -88,3 +95,12 @@ EMAIL_HOST_USER = 'shotgun.ride.share@gmail.com'
 EMAIL_HOST_PASSWORD = 'simonerocks'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+# Elasticsearch Config
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        'URL': 'http://127.0.0.1:9200/',
+        'INDEX_NAME': 'shotgun',
+    },
+}
