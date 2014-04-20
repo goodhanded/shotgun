@@ -5,20 +5,19 @@
     <section id="section-ride-search">
 
         {% if not query %}
-        <form action="" method="post" class="form-inline" role="form" autocomplete="off">
-            {% csrf_token %}
+        
         {% endif %}
             <div class="row">
-                <div class="col-md-10 col-md-offset-1">
+                <div class="col-md-8 col-md-offset-2">
                     <div class="row">
                         <div class="col-md-12">
-                            <h2>Find a Ride</h2>
+                            <h2 style="margin-top: 80px">Find a Ride</h2>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
 
-                            {% if query %}
+                    <div class="row">
+                        {% if query %}
+                            <div class="col-md-6">
                                 <h3>Results</h3>
 
                                 <p><a href="{% url 'rides_search' %}">Back to Search</a></p>
@@ -36,20 +35,28 @@
                                         {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
                                     </div>
                                 {% endif %}
-
-                            {% else %}
-
-                                <label for="address-from">From:</label><br>
-                                {{form.fromInput}}
-                                {{form.fromInput.errors}}
-
-                                <label for="address-to">To:</label><br>
-                                {{form.toInput}}
-                                {{form.toInput.errors}}
-
-                                <label for="id_leavingOn">Leaving On:</label><br>
-                               {{form.leavingOn}}
-                                {{form.leavingOn.errors}}
+                            </div>
+                        {% else %}
+                            <form action="" method="post" class="form-inline" role="form" autocomplete="off">
+                                {% csrf_token %}
+                                <div class="col-md-4">
+                                    <label for="address-from">From:</label><br>
+                                    {{form.fromInput}}
+                                    {{form.fromInput.errors}}
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="address-to">To:</label><br>
+                                    {{form.toInput}}
+                                    {{form.toInput.errors}}                            
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="id_leavingOn">Leaving On:</label><br>
+                                    {{form.leavingOn}}
+                                    {{form.leavingOn.errors}}                            
+                                </div>
+                                <div class="col-md-1" style="padding-top: 30px">
+                                    <input type="submit" value="Search" class="btn btn-primary" />
+                                </div>
 
                                 <span id="details-from">
                                     {{form.fromLat}}
@@ -64,45 +71,64 @@
                                     {{form.toFormatted}}
                                     {{form.toLocality}}
                                 </span>
-
-                            {% endif %}
-
-                        </div>
-                        <div class="col-md-6">
+                            </form>
+                        {% endif %}
+                    </div>
+                        
+                    <div class="row">
+                         <div class="col-md-6 col-md-offset-3">
                             {% if query and not fromLat and not toLat %}
 
                             {% else %}
-                                <div id="map_canvas" class="{% if query %}map-results pull-right{% endif %}"></div>
+                                <div id="map_canvas" style="width: 100%"></div>
                             {% endif %}
                         </div>
                     </div>
 
-                    {% if not query %}
-                    <div class="row">
-                        <div class="col-md-12" style="text-align: center">
-                            <input type="submit" value="Search" class="btn btn-primary" />
-                        </div>
-                    </div>
-                    {% endif %}
-
                 </div>
             </div>  
-        {% if not query %}</form>{% endif %}
+
     </section>
 
     <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyArTylJf9gxDN3uns-Wrmnh9drOb9xmMFU&sensor=false&libraries=places,drawing"></script>
     <script src="{{ STATIC_URL }}js/jquery.geocomplete.min.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/shotgun.map.js"></script>
     <script>
 
         $(document).ready(function(){
-            $("#address-from").geocomplete({details: "#details-from", detailsAttribute: "data-geo", map: "#map_canvas"});
-            $("#address-to").geocomplete({details: "#details-to", detailsAttribute: "data-geo", map: "#map_canvas"});
+            $("#address-from").geocomplete({details: "#details-from", detailsAttribute: "data-geo"});
+            $("#address-to").geocomplete({details: "#details-to", detailsAttribute: "data-geo"});
             $( "#id_leavingOn" ).datepicker();
+
+            $("#address-from")
+                .geocomplete()
+                .bind("geocode:result", function(event, result){
+
+                    if(!$('#id_toLat').val()) {
+                        drawMarker(result.geometry.location.lat(), result.geometry.location.lng());
+                    } else {
+                        drawRoute(result.geometry.location.lat(), result.geometry.location.lng(), $('#id_toLat').val(), $('#id_toLng').val());
+                    }
+                }
+            );
+
+            $("#address-to")
+                .geocomplete()
+                .bind("geocode:result", function(event, result){
+
+                    if(!$('#id_fromLat').val()) {
+                        drawMarker(result.geometry.location.lat(), result.geometry.location.lng());
+                    } else {
+                        drawRoute($('#id_fromLat').val(), $('#id_fromLng').val(), result.geometry.location.lat(), result.geometry.location.lng());
+                    }
+                }
+            );
+
         });
         
     </script>
 
-    <script type="text/javascript" src="{{STATIC_URL}}js/shotgun.map.js"></script>
+    
 
     <script>
         {% if fromLat and toLat %}
