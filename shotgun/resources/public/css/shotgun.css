@@ -47,8 +47,13 @@ nav.account input[type=submit] {
 }
 
 .nav-home>h1 {
-    margin-top: 100px;
+    margin-top: 150px;
     margin-bottom: 30px;
+    text-shadow:
+    -1px -1px 0 #666666,  
+    1px -1px 0 #666666,
+    -1px 1px 0 #666666,
+     1px 1px 0 #666666;
 }
 
 .nav-home>a {
@@ -85,8 +90,8 @@ label {
     background-repeat: no-repeat;
     background-position: fixed;
     background-size: contain;
-        bottom: 0;
-        -webkit-background-size: cover;
+    bottom: 0;
+    -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
 }
@@ -97,7 +102,7 @@ label {
     background-repeat: no-repeat;
     background-position: center bottom;
     background-size: contain;
-        -webkit-background-size: cover;
+    -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     padding: 20px;
@@ -122,16 +127,10 @@ label {
     padding-left: 0px;
     list-style: none;
 }
-#map{
+.map-ride-new{
     border: 1px solid black;
     height: 280px;
     margin: 30px 30px 0px 30px;  
-}
-
-#map_canvas{
-       border: 1px solid black;
-    height: 400px;
-    margin: 30px 30px 0px 30px; 
 }
 
 #map_canvas.map-results {
@@ -158,6 +157,7 @@ label {
     padding: 10px;
     width: 280px;
     border: 1px solid #999999;
+    z-index: 1;
 }
 
 #section-ride-new {

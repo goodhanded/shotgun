@@ -70,6 +70,11 @@ def rides_index(request):
     return render(request, 'rides/index.html', {"rides": rides})
 
 def rides_new(request):
+
+    if not request.user.is_authenticated():
+        messages.error(request,'Please log in or create an account to post a ride!')
+        return redirect('home')
+
     if request.method == 'POST':
         rideForm = RideForm(request.POST)
 

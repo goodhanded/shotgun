@@ -15,9 +15,9 @@ class RideForm(forms.Form):
     toFormatted = forms.CharField(widget=forms.HiddenInput(attrs={'data-geo':'formatted_address'}), max_length=255)
     toLocality = forms.CharField(widget=forms.HiddenInput(attrs={'data-geo':'locality'}), max_length=255)
 
-    leavingOn = forms.DateField(widget=forms.DateInput(attrs={'class':'col-md-12'}))
-    gasMoney = forms.DecimalField(widget=forms.NumberInput(attrs={'class':'col-md-12'}), max_digits=6, decimal_places=2)
-    luggageRoom = forms.IntegerField(widget=forms.NumberInput(attrs={'class':'col-md-12'}))
+    leavingOn = forms.DateField(widget=forms.DateInput(attrs={'class':'col-md-12','placeholder':'mm/dd/yyy'}))
+    gasMoney = forms.DecimalField(widget=forms.NumberInput(attrs={'class':'col-md-12', 'placeholder':'5.00'}), max_digits=6, decimal_places=2)
+    luggageRoom = forms.IntegerField(widget=forms.NumberInput(attrs={'class':'col-md-12', 'placeholder':'5'}))
 
 class ProfileForm(ModelForm):
     class Meta:

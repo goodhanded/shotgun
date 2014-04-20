@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 """
 
 import os
+from django.contrib.messages import constants as messages
 
 PROJECT_ROOT = os.path.dirname(__file__)
 SITE_ROOT = os.path.dirname(PROJECT_ROOT)
@@ -85,6 +86,11 @@ STATICFILES_DIRS = (
 TEMPLATE_DIRS = (
     os.path.join(RESOURCES_ROOT, 'templates'),
 )
+
+
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+}
 
 # Configure django-registration
 ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window; you may, of course, use a different value.
