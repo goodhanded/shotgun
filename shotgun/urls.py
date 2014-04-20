@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, include, url
+from django.conf import settings
 from django.contrib import admin
 from django.contrib.auth.views import login
 
@@ -13,4 +14,5 @@ urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
     (r'^login/$',  login),
     (r'^accounts/', include('registration.backends.default.urls')),
+    (r'^uploads/(?P<path>.*)$', 'django.views.static.serve',{'document_root': settings.MEDIA_ROOT,}),
 )

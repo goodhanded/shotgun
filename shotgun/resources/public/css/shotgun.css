@@ -200,7 +200,8 @@ label {
     overflow: auto;
 }
 
-#img{
+
+div.img img {
     height: 105px;
     width: 120px;
     border: 1px solid black;

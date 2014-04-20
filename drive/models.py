@@ -19,7 +19,7 @@ class ShotgunProfile(models.Model):
         ('Males/Females', 'Males/Females'),
     )
     user = models.OneToOneField(User, related_name='shotgunprofile')
-    avatar = models.ImageField(upload_to='images/avatars/', default='')
+    avatar = models.ImageField(upload_to='images/avatars/', default='', blank=True)
     school = models.CharField(max_length=50, choices=SCHOOLS, default='UNC Chapel Hill')
     year = models.CharField(max_length=10, choices=YEARS, default='Freshman')
     passengers = models.CharField(max_length=15, choices=PASSENGERS, default='Males/Females')

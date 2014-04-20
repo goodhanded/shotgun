@@ -25,12 +25,12 @@ def drive_logout(request):
 
 def profile_edit(request):
     if request.method == 'POST':
-        form = ProfileForm(request.POST, instance=ShotgunProfile.objects.get(user=request.user))
+        form = ProfileForm(request.POST, request.FILES, instance=ShotgunProfile.objects.get(user=request.user))
 
         if form.is_valid():
 
             profile = form.save(commit=False)
-            # profile.user = request.user
+            profile.avatar = form.cleaned_data['avatar']
             profile.save()
 
             messages.success(request,'Your profile has been updated!')
