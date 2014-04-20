@@ -134,6 +134,11 @@ label {
     margin: 30px 30px 0px 30px; 
 }
 
+#map_canvas.map-results {
+    height: 280px;
+    width: 280px;
+}
+
 #new-map{
     height: 300px;
     border: 1px solid black;
@@ -171,8 +176,17 @@ label {
     margin: 20px 30px 0px 30px;
 }
 
+#section-ride-search label {
+    margin-top: 15px;
+}
+
 .ride{
     border-bottom: 1px solid black;
+    padding-bottom: 20px;
+}
+
+.ride:last-child{
+    border-bottom: none;
 }
 
 .ride>h4{

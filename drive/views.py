@@ -10,6 +10,8 @@ from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from haystack.query import SearchQuerySet
 from haystack.utils.geo import Point, D
+from django.core.paginator import Paginator, InvalidPage
+import datetime
 
 def home(request):
     return render(request, "home.html", {
@@ -113,21 +115,54 @@ def rides_search(request):
         searchForm = SearchForm(request.POST)
 
         if searchForm.is_valid():
+
+            sqs = SearchQuerySet()
+            distance = D(mi=20)
+
             fromLat = searchForm.cleaned_data['fromLat']
             fromLng = searchForm.cleaned_data['fromLng']
-            fromFormatted = searchForm.cleaned_data['fromFormatted']
-            fromCity = searchForm.cleaned_data['fromLocality']
             toLat = searchForm.cleaned_data['toLat']
             toLng = searchForm.cleaned_data['toLng']
-            toFormatted = searchForm.cleaned_data['toFormatted']
-            toCity = searchForm.cleaned_data['toLocality']
 
+            if fromLat and fromLng:
+                fromPoint = Point(float(fromLng), float(fromLat))
+                sqs = sqs.dwithin('fromLocation', fromPoint, distance)
+            else:
+                fromPoint = None
 
+            if toLat and toLng:
+                toPoint = Point(float(searchForm.cleaned_data['toLng']), float(searchForm.cleaned_data['toLat']))
+                sqs = sqs.dwithin('toLocation', toPoint, distance)
+            else:
+                toPoint = None
 
-            return render(request, 'search/search.html', '')      
+            if searchForm.cleaned_data['leavingOn']:
+                sqs = sqs.filter(leavingOn__exact=searchForm.cleaned_data['leavingOn'])
+            else:
+                sqs = sqs.filter(leavingOn__gte=datetime.date.today())
 
+            paginator = Paginator(sqs, 10)
+
+            try:
+                page = paginator.page(int(request.GET.get('page', 1)))
+            except InvalidPage:
+                raise Http404("No such page of results!")
+
+            context = {
+                'form': searchForm,
+                'page': page,
+                'paginator': paginator,
+                'query': True,
+                'suggestion': None,
+                'fromLat': fromLat,
+                'fromLng': fromLng,
+                'toLat': toLat,
+                'toLng': toLng,
+            }
+
+            return render(request, 'rides/search.html', context)
 
     else:
         searchForm = SearchForm()
 
-    return render(request, 'rides/search.html', {'searchForm': searchForm})
+    return render(request, 'rides/search.html', {'form': searchForm})

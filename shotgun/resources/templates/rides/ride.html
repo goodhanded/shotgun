@@ -1,0 +1,12 @@
+<div class="ride">
+    {#<img src="#" alt="Driver Image">#}
+   <div id="img"></div>
+    <h3><a href="{% url "rides_show" pk=ride.id %}">{{ride.fromLocation.city}} to {{ride.toLocation.city}}</a></h3>
+    <h4>{{ride.driver.username}}</h4>
+    <p>
+        {{ride.leavingOn}}<br>
+        {{ride.driver.shotgunprofile.school}} |
+        {{ride.driver.shotgunprofile.year}}<br>
+        Types of Passengers: {{ride.driver.shotgunprofile.passengers}}<br>
+    </p>
+</div>

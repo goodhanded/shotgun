@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from haystack.utils.geo import Point
 
 class ShotgunProfile(models.Model):
     YEARS = (
@@ -28,6 +29,10 @@ class Location(models.Model):
     lng = models.DecimalField(max_digits=10, decimal_places=6)
     formattedAddress = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
+
+    def get_location(self):
+        # Remember, longitude FIRST!
+        return Point(float(self.lng), float(self.lat))
 
 class Ride(models.Model):
     driver = models.ForeignKey(User) 

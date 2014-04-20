@@ -1,0 +1,117 @@
+{% extends 'layout_header.html' %}
+
+{% block content %}
+
+    <section id="section-ride-search">
+
+        {% if not query %}
+        <form action="" method="post" class="form-inline" role="form" autocomplete="off">
+            {% csrf_token %}
+        {% endif %}
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2>Find a Ride</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+
+                            {% if query %}
+                                <h3>Results</h3>
+
+                                <p><a href="{% url 'rides_search' %}">Back to Search</a></p>
+
+                                {% for result in page.object_list %}
+                                    {% include 'rides/ride.html' with ride=result.object %}
+                                {% empty %}
+                                    <p>No results found.</p>
+                                {% endfor %}
+
+                                {% if page.has_previous or page.has_next %}
+                                    <div>
+                                        {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
+                                        |
+                                        {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
+                                    </div>
+                                {% endif %}
+
+                            {% else %}
+
+                                <label for="address-from">From:</label><br>
+                                {{form.fromInput}}
+                                {{form.fromInput.errors}}
+
+                                <label for="address-to">To:</label><br>
+                                {{form.toInput}}
+                                {{form.toInput.errors}}
+
+                                <label for="id_leavingOn">Leaving On:</label><br>
+                               {{form.leavingOn}}
+                                {{form.leavingOn.errors}}
+
+                                <span id="details-from">
+                                    {{form.fromLat}}
+                                    {{form.fromLng}}
+                                    {{form.fromFormatted}}
+                                    {{form.fromLocality}}
+                                </span>
+
+                                <span id="details-to">
+                                    {{form.toLat}}
+                                    {{form.toLng}}
+                                    {{form.toFormatted}}
+                                    {{form.toLocality}}
+                                </span>
+
+                            {% endif %}
+
+                        </div>
+                        <div class="col-md-6">
+                            {% if query and not fromLat and not toLat %}
+
+                            {% else %}
+                                <div id="map_canvas" class="{% if query %}map-results pull-right{% endif %}"></div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    {% if not query %}
+                    <div class="row">
+                        <div class="col-md-12" style="text-align: center">
+                            <input type="submit" value="Search" class="btn btn-primary" />
+                        </div>
+                    </div>
+                    {% endif %}
+
+                </div>
+            </div>  
+        {% if not query %}</form>{% endif %}
+    </section>
+
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyArTylJf9gxDN3uns-Wrmnh9drOb9xmMFU&sensor=false&libraries=places,drawing"></script>
+    <script src="{{ STATIC_URL }}js/jquery.geocomplete.min.js"></script>
+    <script>
+
+        $(document).ready(function(){
+            $("#address-from").geocomplete({details: "#details-from", detailsAttribute: "data-geo", map: "#map_canvas"});
+            $("#address-to").geocomplete({details: "#details-to", detailsAttribute: "data-geo", map: "#map_canvas"});
+            $( "#id_leavingOn" ).datepicker();
+        });
+        
+    </script>
+
+    <script type="text/javascript" src="{{STATIC_URL}}js/shotgun.map.js"></script>
+
+    <script>
+        {% if fromLat and toLat %}
+            drawRoute({{fromLat}}, {{fromLng}}, {{toLat}}, {{toLng}});
+        {% elif fromLat %}
+            drawMarker({{fromLat}}, {{fromLng}});
+        {% elif toLat %}
+            drawMarker({{toLat}}, {{toLng}});
+        {% endif %}
+    </script>
+
+{% endblock %}

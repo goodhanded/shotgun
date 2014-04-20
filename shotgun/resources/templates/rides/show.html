@@ -2,78 +2,37 @@
 
 {% block content %}
 
- 
-
     {# This is the list of rides #}
-     <div class="col-md-5">
     <section id="section-ride-index">
 
-            <div class="ride">
-                <div id="img"></div>
-                <h2>{{ride.driver.username}}</h2>
-                <h4>From {{ride.fromLocation.city}} to {{ride.toLocation.city}}</h4>
-                <p>
-                    {{ride.driver.shotgunprofile.school}} |
-                    {{ride.driver.shotgunprofile.year}}<br>
-                    Types of Passengers: {{ride.driver.shotgunprofile.passengers}}<br>
-
-    </section>
-     </div>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>Find a Ride</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        {% include 'rides/ride.html' with ride=ride %}
+                    </div>
+                    <div class="col-md-6">
+                        <div id="map_canvas" class="map-results pull-right"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     
-       {# This should be fixed to the top right #}
-     <div class="col-md-6 col-md-offset-1">
-    <div id="map_canvas">
-        
-    </div>
-     </div>
+    </section>
 
 
 {% endblock %}
 
 {% block javascripts %}
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArTylJf9gxDN3uns-Wrmnh9drOb9xmMFU&sensor=true"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/shotgun.map.js"></script>
 
     <script type="text/javascript">
-
-        var directionsService = new google.maps.DirectionsService();
-        var directionsDisplay = new google.maps.DirectionsRenderer();
-
-        var bounds = new google.maps.LatLngBounds();
-        var from = new google.maps.LatLng({{ride.fromLocation.lat}}, {{ride.fromLocation.lng}});
-        var to = new google.maps.LatLng({{ride.toLocation.lat}}, {{ride.toLocation.lng}});
-
-        var mapOptions = {
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-
-        map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
-
-        directionsDisplay.setMap(map);
-         
-        fromMarker = new google.maps.Marker({
-            position: from,
-            title: 'Start'
-        });
-        bounds.extend(fromMarker.position);
-
-        toMarker = new google.maps.Marker({
-            position: to,
-            title: 'End'
-        });
-        bounds.extend(toMarker.position);
-
-        var request = {
-            origin: from,
-            destination: to,
-            travelMode: google.maps.TravelMode.DRIVING
-        }
-        directionsService.route(request, function(response, status) {
-            if (status == google.maps.DirectionsStatus.OK) {
-                directionsDisplay.setDirections(response);
-            }
-        });
-
-        map.fitBounds(bounds);
-
+        drawRoute({{ride.fromLocation.lat}}, {{ride.fromLocation.lng}}, {{ride.toLocation.lat}}, {{ride.toLocation.lng}});
     </script>
 {% endblock %}
