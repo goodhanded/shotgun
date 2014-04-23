@@ -92,7 +92,7 @@ label {
 .container-home {
     background-image: url(../img/road3.jpg);
     background-repeat: no-repeat;
-    background-position: fixed;
+    background-position: center bottom;
     background-size: contain;
     bottom: 0;
     -webkit-background-size: cover;
