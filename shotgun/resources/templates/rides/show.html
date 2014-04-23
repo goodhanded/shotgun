@@ -18,7 +18,7 @@
                         {% if user.is_authenticated %}
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <a href="mailto:{{ride.driver.user.email}}" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-envelope"></span> Email this Driver</a>
+                                    <a href="mailto:{{ride.driver.email}}" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-envelope"></span> Email this Driver</a>
                                 </div>
                             </div>
                         {% else %}
