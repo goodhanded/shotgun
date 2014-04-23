@@ -1,6 +1,6 @@
 <nav class="account">
     {% if user.is_authenticated %}
-        <a href="{% url 'drive.views.profile_edit' %}">My Account</a> |
+        <a href="{% url 'drive.views.profile_edit' %}">My Account</a>
         <a href="{% url 'drive.views.drive_logout' %}" id="logout">Logout</a>
     {% else %}
         <a href="#" id="login">Login</a>

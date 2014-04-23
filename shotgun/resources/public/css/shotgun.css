@@ -12,6 +12,10 @@ nav.account a {
     float: right;
 }
 
+input {
+    z-index: 1;
+}
+
 h1 {
     font-family: "Bangla Sangam MN";
     font-size: 70px;
@@ -97,7 +101,6 @@ label {
 }
 
 .header {
-    height: 100px;
     background-image: url(../img/road-top.jpg);
     background-repeat: no-repeat;
     background-position: center bottom;
@@ -105,12 +108,8 @@ label {
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    padding: 20px;
 }
 
-.header h1 {
-    margin: 0px 30px 0px 30px;
-}
 
 .pull-right{
     margin: 0px 30px 0px 30px;
@@ -127,20 +126,16 @@ label {
     padding-left: 0px;
     list-style: none;
 }
-.map-ride-new{
-    border: 1px solid black;
-    height: 280px;
-    margin: 30px 30px 0px 30px;  
+
+#map_canvas {
+    border: 1px solid #999999;
+    min-height: 280px;
+    margin-bottom: 20px;
 }
 
-#map_canvas.map-results {
-    height: 280px;
-    width: 280px;
-}
-
-#new-map{
-    height: 300px;
-    border: 1px solid black;
+.map-new {
+    margin-top: 32px;
+    height: 320px;
 }
 
 #section-home {
@@ -160,20 +155,8 @@ label {
     z-index: 1;
 }
 
-#section-ride-new {
-    margin-top: 20px;
-}
-
-#section-ride-new div.row {
-    margin-top: 20px;
-}
-
 #section-ride-new label {
     margin-top: 15px;
-}
-
-#section-ride-index{
-    margin: 20px 30px 0px 30px;
 }
 
 #section-ride-search label {
@@ -181,17 +164,17 @@ label {
 }
 
 .ride{
-    border-bottom: 1px solid black;
-    padding-bottom: 20px;
-}
-
-.ride:last-child{
-    border-bottom: none;
+    border-top: 1px solid #999999;
+    padding-top: 20px;
 }
 
 .ride>h4{
     color: black;
     font-weight: bold;
+    margin-top: -5px;
+}
+
+.ride>h3{
     margin-top: -5px;
 }
 
@@ -209,12 +192,9 @@ div.img img {
     margin-right: 10px;
 }
 
-.btn-primary{
+.btn-primary {
     background-color: #ddc84b;
-    border-color: #ddc84b;
-    font-family: "Myriad Pro", Arial, "sans-serif";
-    font-size: 15px;
-    margin-right: 150px;
+    border-color: #ccb73a;
 }
 
 .ui-widget-header{

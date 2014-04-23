@@ -34,7 +34,7 @@ def profile_edit(request):
             profile.save()
 
             messages.success(request,'Your profile has been updated!')
-            return redirect('home')
+            return redirect('profile_edit')
 
     else:
         #load current user into form
@@ -104,7 +104,7 @@ def rides_new(request):
             ride.save()
 
             messages.success(request,'Your ride has been posted!')
-            return redirect('home')
+            return redirect('rides_show', pk=ride.id)
 
     else:
         rideForm = RideForm()
@@ -116,13 +116,13 @@ def rides_show(request, pk):
     return render(request, "rides/show.html", {'ride': ride})
 
 def rides_search(request):
+    sqs = SearchQuerySet()
+    distance = D(mi=20)
+
     if request.method == 'POST':
         searchForm = SearchForm(request.POST)
 
         if searchForm.is_valid():
-
-            sqs = SearchQuerySet()
-            distance = D(mi=20)
 
             fromLat = searchForm.cleaned_data['fromLat']
             fromLng = searchForm.cleaned_data['fromLng']
@@ -154,7 +154,7 @@ def rides_search(request):
                 raise Http404("No such page of results!")
 
             context = {
-                'form': searchForm,
+                'form': SearchForm(),
                 'page': page,
                 'paginator': paginator,
                 'query': True,
@@ -165,9 +165,22 @@ def rides_search(request):
                 'toLng': toLng,
             }
 
-            return render(request, 'rides/search.html', context)
-
     else:
-        searchForm = SearchForm()
+        sqs = sqs.filter(leavingOn__gte=datetime.date.today())
 
-    return render(request, 'rides/search.html', {'form': searchForm})
+        paginator = Paginator(sqs, 10)
+
+        try:
+            page = paginator.page(int(request.GET.get('page', 1)))
+        except InvalidPage:
+            raise Http404("No such page of results!")
+
+        context = {
+            'form': SearchForm(),
+            'page': page,
+            'paginator': paginator,
+            'query': False,
+            'suggestion': None,
+        }
+
+    return render(request, 'rides/search.html', context)

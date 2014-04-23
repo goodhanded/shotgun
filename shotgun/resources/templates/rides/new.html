@@ -1,68 +1,6 @@
 {% extends 'layout_header.html' %}
 
-{% block content %}
-    
-    <section id="section-ride-new">
-        <form action="" method="post" class="form-inline" role="form" autocomplete="off">
-            {% csrf_token %}
-            <div class="row">
-                <div class="col-md-10 col-md-offset-1">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h2>Post a Ride</h2>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label for="address-from">From:</label><br>
-                            {{rideForm.fromInput}}
-                            {{rideForm.fromInput.errors}}
-
-                            <label for="address-to">To:</label><br>
-                            {{rideForm.toInput}}
-                            {{rideForm.toInput.errors}}
-
-                            <label for="id_leavingOn">Leaving On:</label><br>
-                           {{rideForm.leavingOn}}
-                            {{rideForm.leavingOn.errors}}
-
-                            <label for="id_gasMoney">Gas Money ($):</label><br>
-                            {{rideForm.gasMoney}}
-                            {{rideForm.gasMoney.errors}}
-
-                            <label for="id_luggageRoom">Luggage Room:</label><br>
-                            {{rideForm.luggageRoom}}
-                            {{rideForm.luggageRoom.errors}}
-
-                            <span id="details-from">
-                                {{rideForm.fromLat}}
-                                {{rideForm.fromLng}}
-                                {{rideForm.fromFormatted}}
-                                {{rideForm.fromLocality}}
-                            </span>
-
-                            <span id="details-to">
-                                {{rideForm.toLat}}
-                                {{rideForm.toLng}}
-                                {{rideForm.toFormatted}}
-                                {{rideForm.toLocality}}
-                            </span>
-                        </div>
-                        <div class="col-md-6">
-                            <div id="map_canvas" class="map-ride-new"></div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12" style="text-align: center">
-                            <input type="submit" value="Post Your Ride!" class="btn btn-primary" />
-                        </div>
-                    </div>
-                </div>
-            </div>  
-        </form>
-    </section>
-
+{% block head %}
     <script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>
     <script src="{{ STATIC_URL }}js/jquery.geocomplete.min.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}js/shotgun.map.js"></script>
@@ -98,6 +36,77 @@
             );
 
         });
-        
     </script>
+{% endblock %}
+
+{% block navbar %}{% include 'navbar.html' with active='add' %}{% endblock %}
+
+{% block content %}
+    
+    <section id="section-ride-new">
+        <form action="" method="post" class="form-inline" role="form" autocomplete="off">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-sm-12 col-md-10 col-md-offset-1">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2>Add a Ride</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="address-from">From:</label><br>
+                            {{rideForm.fromInput}}
+                            {{rideForm.fromInput.errors}}
+
+                            <label for="address-to">To:</label><br>
+                            {{rideForm.toInput}}
+                            {{rideForm.toInput.errors}}
+
+                            <label for="id_leavingOn">Leaving On:</label><br>
+                            {{rideForm.leavingOn}}
+                            {{rideForm.leavingOn.errors}}
+
+                            <label for="id_gasMoney">Gas Money ($):</label><br>
+                            {{rideForm.gasMoney}}
+                            <span class="help-block"><span class="glyphicon glyphicon-info-sign"></span> How much gas money are you asking passengers to pay?</span>
+                            {{rideForm.gasMoney.errors}}
+
+                            <label for="id_luggageRoom">Luggage Room:</label><br>
+                            {{rideForm.luggageRoom}}
+                            <span class="help-block"><span class="glyphicon glyphicon-info-sign"></span> How many passenger bags can you fit in your car?</span>
+                            
+                            {{rideForm.luggageRoom.errors}}
+
+                            <span id="details-from">
+                                {{rideForm.fromLat}}
+                                {{rideForm.fromLng}}
+                                {{rideForm.fromFormatted}}
+                                {{rideForm.fromLocality}}
+                            </span>
+
+                            <span id="details-to">
+                                {{rideForm.toLat}}
+                                {{rideForm.toLng}}
+                                {{rideForm.toFormatted}}
+                                {{rideForm.toLocality}}
+                            </span>
+                        </div>
+                        <div class="col-md-6">
+                            <div id="map_canvas" class="map-new">
+                                <div style="width: 100%; text-align: center; padding: 140px">Type an address to get started!</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12" style="text-align: center">
+                            <input type="submit" value="Post Your Ride!" class="btn btn-primary" />
+                        </div>
+                    </div>
+                </div>
+            </div>  
+        </form>
+    </section>
+
 {% endblock %}

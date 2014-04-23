@@ -4,29 +4,68 @@
     
     <section id="section-profile-edit">
         <form action="" method="post" class="form-horizontal" role="form" autocomplete="off" enctype="multipart/form-data">
+            
             {% csrf_token %}
+
             <div class="row">
-                <div class="col-md-10 col-md-offset-1">
+                <div class="col-xs-10 col-xs-offset-1">
+
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-xs-12">
                             <h2>Edit Profile</h2>
                         </div>
                     </div>
 
-
                     <div class="row">
-                        <div class="col-md-12">
-                            {{form.as_p}}
+                        {% if user.shotgunprofile.avatar.url != "/uploads/False" %}<div class="col-xs-12" style="margin: 0px 0px 10px -12px;"><img src="{{ user.shotgunprofile.avatar.url }}" alt="Driver Image" class="col-xs-1"></div>{% endif %}
+                        <div class="col-xs-12">
+                            <label for="address-to">Avatar:</label><br>
+                            {{form.avatar}}
+                            {{form.avatar.errors}}
                         </div>
                     </div>
 
+                    <div class="row"><div class="col-xs-12">&nbsp;</div></div>
+
                     <div class="row">
-                        <div class="col-md-12" style="text-align: center">
+                        <div class="col-xs-12">
+                            <label for="address-to">School:</label><br>
+                            {{form.school}}
+                            {{form.school.errors}}
+                        </div>
+                    </div>
+
+                    <div class="row"><div class="col-xs-12">&nbsp;</div></div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <label for="address-to">Year:</label><br>
+                            {{form.year}}
+                            {{form.year.errors}}
+                        </div>
+                    </div>
+
+                    <div class="row"><div class="col-xs-12">&nbsp;</div></div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <label for="address-to">Passengers:</label><br>
+                            {{form.passengers}}
+                            {{form.passengers.errors}}
+                        </div>
+                    </div>
+
+                    <div class="row"><div class="col-xs-12">&nbsp;</div></div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
                             <input type="submit" value="Update" class="btn btn-primary" />
                         </div>
                     </div>
+    
                 </div>
-            </div>  
+            </div>
+
         </form>
     </section>
 

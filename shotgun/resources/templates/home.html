@@ -3,11 +3,37 @@
 {% block content %}
 
     <div class="row">
-        <div class="col-md-6 col-md-offset-3 nav-home">
-            <h1>Shotgun!</h1>
-            <a href="{% url 'drive.views.rides_search' %}"><span class="glyphicon glyphicon-search"></span> Find a Ride</a>
-            <a href="{% url 'drive.views.rides_new' %}"><span class="glyphicon glyphicon-plus-sign"></span> Add a Ride</a>                
-        </div>            
+        <div class="col-xs-12">
+            <img src="{{STATIC_URL}}img/shotgun-logo.png" alt="Shotgun Logo" class="center-block" style="max-width: 100%; margin-top: 8em; margin-bottom: 2em;">
+        </div>
     </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                    <a href="{% url 'drive.views.rides_search' %}" class="btn btn-primary col-xs-12"><span class="glyphicon glyphicon-search"></span> Find a Ride</a>
+                </div>
+                <div class="row visible-xs"><div class="col-xs-12">&nbsp;</div></div>
+                <div class="col-xs-12 col-sm-6">
+                    <a href="{% url 'drive.views.rides_new' %}" class="btn btn-primary col-xs-12"><span class="glyphicon glyphicon-plus-sign"></span> Add a Ride</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="row"><div class="col-xs-12">&nbsp;</div></div>
+            <div class="row">
+                <div class="col-xs-12 col-md-6 col-md-offset-3">
+                    <div class="alert{% if message.tags %} alert-{{message.tags}}{% else %} alert-info{% endif %}">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        {{ message }}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}  
 
 {% endblock %}

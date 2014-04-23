@@ -1,0 +1,34 @@
+<nav class="navbar navbar-default navbar-static-top" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand visible-xs">Menu</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li{% if active == 'find' %} class="active"{% endif %}><a href="{% url 'drive.views.rides_search' %}">Find a Ride</a></li>
+                <li{% if active == 'add' %} class="active"{% endif %}><a href="{% url 'drive.views.rides_new' %}">Add a Ride</a></li>
+            </ul>
+
+            {% if user.is_authenticated %}
+                <ul class="nav navbar-nav navbar-right">
+                    <p class="navbar-text hidden-xs">Welcome, {{user.username}}!</p>
+                    <li><a href="{% url 'drive.views.profile_edit' %}">My Account</a></li>
+                    <li><a href="{% url 'drive.views.drive_logout' %}">Logout</a></li>
+                </ul>
+            {% else %}
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{% url 'drive.views.drive_logout' %}">Log In</a></li>
+                </ul>            
+            {% endif %}
+        </div>
+    </div>
+</nav>

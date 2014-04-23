@@ -1,95 +1,6 @@
 {% extends 'layout_header.html' %}
 
-{% block content %}
-
-    <section id="section-ride-search">
-
-        {% if not query %}
-        
-        {% endif %}
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h2 style="margin-top: 80px">Find a Ride</h2>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        {% if query %}
-                            <div class="col-md-6">
-                                <h3>Results</h3>
-
-                                <p><a href="{% url 'rides_search' %}">Back to Search</a></p>
-
-                                {% for result in page.object_list %}
-                                    {% include 'rides/ride.html' with ride=result.object %}
-                                {% empty %}
-                                    <p>No results found.</p>
-                                {% endfor %}
-
-                                {% if page.has_previous or page.has_next %}
-                                    <div>
-                                        {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
-                                        |
-                                        {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
-                                    </div>
-                                {% endif %}
-                            </div>
-                        {% else %}
-                            <form action="" method="post" class="form-inline" role="form" autocomplete="off">
-                                {% csrf_token %}
-                                <div class="col-md-4">
-                                    <label for="address-from">From:</label><br>
-                                    {{form.fromInput}}
-                                    {{form.fromInput.errors}}
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="address-to">To:</label><br>
-                                    {{form.toInput}}
-                                    {{form.toInput.errors}}                            
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="id_leavingOn">Leaving On:</label><br>
-                                    {{form.leavingOn}}
-                                    {{form.leavingOn.errors}}                            
-                                </div>
-                                <div class="col-md-1" style="padding-top: 30px">
-                                    <input type="submit" value="Search" class="btn btn-primary" />
-                                </div>
-
-                                <span id="details-from">
-                                    {{form.fromLat}}
-                                    {{form.fromLng}}
-                                    {{form.fromFormatted}}
-                                    {{form.fromLocality}}
-                                </span>
-
-                                <span id="details-to">
-                                    {{form.toLat}}
-                                    {{form.toLng}}
-                                    {{form.toFormatted}}
-                                    {{form.toLocality}}
-                                </span>
-                            </form>
-                        {% endif %}
-                    </div>
-                        
-                    <div class="row">
-                         <div class="col-md-6 col-md-offset-3">
-                            {% if query and not fromLat and not toLat %}
-
-                            {% else %}
-                                <div id="map_canvas" class="map-ride-new" style="width: 100%"></div>
-                            {% endif %}
-                        </div>
-                    </div>
-
-                </div>
-            </div>  
-
-    </section>
-
+{% block head %}
     <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyArTylJf9gxDN3uns-Wrmnh9drOb9xmMFU&sensor=false&libraries=places,drawing"></script>
     <script src="{{ STATIC_URL }}js/jquery.geocomplete.min.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}js/shotgun.map.js"></script>
@@ -109,6 +20,9 @@
                     } else {
                         drawRoute(result.geometry.location.lat(), result.geometry.location.lng(), $('#id_toLat').val(), $('#id_toLng').val());
                     }
+
+                    $("#map-row").slideDown();
+                    $("#results-row").fadeOut();
                 }
             );
 
@@ -121,6 +35,9 @@
                     } else {
                         drawRoute($('#id_fromLat').val(), $('#id_fromLng').val(), result.geometry.location.lat(), result.geometry.location.lng());
                     }
+
+                    $("#map-row").slideDown();
+                    $("#results-row").fadeOut();
                 }
             );
 
@@ -128,7 +45,94 @@
         
     </script>
 
-    
+{% endblock %}
+
+{% block content %}
+
+    <section id="section-ride-search">
+
+        {% if not query %}
+        
+        {% endif %}
+            <div class="row">
+                <div class="col-sm-12 col-md-10 col-md-offset-1">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2>Find a Ride</h2>
+                        </div>
+                    </div>
+
+                    <form action="" method="post" class="form-inline" role="form" autocomplete="off">
+                        {% csrf_token %}
+                        <div class="row">
+                                <div class="col-sm-12 col-md-4">
+                                    <label for="address-from">From:</label><br>
+                                    {{form.fromInput}}
+                                    {{form.fromInput.errors}}
+                                </div>
+                                <div class="col-sm-12 col-md-4">
+                                    <label for="address-to">To:</label><br>
+                                    {{form.toInput}}
+                                    {{form.toInput.errors}}                            
+                                </div>
+                                <div class="col-sm-12 col-md-4">
+                                    <label for="id_leavingOn">Leaving On:</label><br>
+                                    {{form.leavingOn}}
+                                    {{form.leavingOn.errors}}                            
+                                </div>
+
+                                <span id="details-from">
+                                    {{form.fromLat}}
+                                    {{form.fromLng}}
+                                    {{form.fromFormatted}}
+                                    {{form.fromLocality}}
+                                </span>
+
+                                <span id="details-to">
+                                    {{form.toLat}}
+                                    {{form.toLng}}
+                                    {{form.toFormatted}}
+                                    {{form.toLocality}}
+                                </span>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-sm-offset-3" style="padding: 20px 15px 20px 15px">
+                                <input type="submit" value="Search" class="btn btn-primary col-xs-12" />
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="row" id="map-row"{% if not fromLat and not toLat %} style="display: none"{% endif %}>
+                        <div class="col-md-12">
+                            <div id="map_canvas" class="map-ride-new col-md-12"></div>
+                        </div>
+                    </div>
+
+                    <div class="row" id="results-row">
+                        <div class="col-md-12">
+                            {% for result in page.object_list %}
+                                {% if result.object.id %}
+                                    {% include 'rides/ride.html' with ride=result.object %} 
+                                {% endif %}
+                            {% empty %}
+                                <p class="col-xs-12" style="text-align: center">No results found. Try another search?</p>
+                            {% endfor %}
+
+                            {% if page.has_previous or page.has_next %}
+                                <div>
+                                    {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
+                                    |
+                                    {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                </div>
+            </div>  
+
+    </section>
 
     <script>
         {% if fromLat and toLat %}
