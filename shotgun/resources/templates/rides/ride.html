@@ -1,5 +1,5 @@
 <div class="ride">
-   {% if user.shotgunprofile.avatar.url != "/uploads/False" %}<div class="img"><img src="{{ ride.driver.shotgunprofile.avatar.url }}" alt="Driver Image"></div>{% endif %}
+   {% if ride.driver.shotgunprofile.avatar.url != "/uploads/False" %}<div class="img"><img src="{{ ride.driver.shotgunprofile.avatar.url }}" alt="Driver Image"></div>{% endif %}
     <h3><a href="{% url 'rides_show' pk=ride.id %}">{{ride.fromLocation.city}} to {{ride.toLocation.city}}</a></h3>
     <h4>{{ride.driver.username}}</h4>
     <p>
