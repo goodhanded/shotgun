@@ -1,5 +1,23 @@
 {% extends 'base.html' %}
 
+{% block head %}
+    <script>
+        $(document).ready(function(){
+            var egg = false;
+
+            $("#easter-egg").click(function(){
+                if(egg){
+                    $(".container-home").css("background-image","url({{STATIC_URL}}img/road3.jpg)");
+                    egg = false;
+                } else {
+                    $(".container-home").css("background-image","url({{STATIC_URL}}img/easter-bg.jpg)");
+                    egg = true;
+                }
+            });
+        });
+    </script>
+{% endblock %}
+
 {% block body %}
 
     <div class="container-fluid container-home">
@@ -18,4 +36,5 @@
         </div>
     </div>
 
+    <a id="easter-egg" href="#" style="position: fixed; top: 0; left:0">;)</a>
 {% endblock %}
